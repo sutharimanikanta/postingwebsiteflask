@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    {% with messages=get_flashed_messages(with_categories=true)%} {% if
+    messages%} {% for category, message in messages%}
+    <p style="color: green">{{message}}</p>
+    {% endfor%} {% endif%} {% endwith%}
+    <form method="POST">
+      {{form.hidden_tag()}} {{form.uname.label}}{{form.uname()}}<br />
+      {{form.password.label}}{{form.password()}}<br />
+      {{form.submit()}}
+    </form>
+    <p>if not registered <a href="{{url_for('register')}}">Register</a></p>
+  </body>
+</html>

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Post</title>
+  </head>
+  <body>
+    <h1>Edit Post</h1>
+
+    {% with message=get_flashed_messages(with_categories=true) %} {% if message
+    %} {% for category, message in message %}
+    <p style="color: green">{{message}}</p>
+    {% endfor %} {% endif %} {% endwith %}
+
+    <form method="POST">
+      {{ form.hidden_tag() }}
+
+      <label for="title">Title:</label>
+      {{ form.title(id="title", required=True) }}
+      <br /><br />
+
+      <label for="content">Content:</label>
+      {{ form.content(id="content", rows=5, cols=50, required=True) }}
+      <br /><br />
+
+      {{ form.submit() }}
+    </form>
+
+    <a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+  </body>
+</html>

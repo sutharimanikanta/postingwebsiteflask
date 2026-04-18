@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>Login</h2>
+
+    <!-- 🔥 Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %} {% for category, message in messages %}
+    <p style="color: green">{{ message }}</p>
+    {% endfor %} {% endif %} {% endwith %} {}
+    <h1>view posts</h1>
+    <p>Title: {{ post.title }}</p>
+    <textarea rows="5" cols="50" readonly>{{ post.content }}</textarea><br />
+    {% if post.image %}
+    <img src="{{ post.image }}" alt="Post Image" />
+    {% endif %}
+  </body>
+</html>

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="header">
+      <h2>welcome,{{user.username}}</h2>
+      <a href="{{ url_for('logout') }}">Logout</a>
+    </div>
+    <p>Email: {{user.email}}</p>
+    {% if user.profile_pic %}
+    <img src="{{url_for('static',filename='uploads/'+user.profile_pic)}}" />
+    {%endif%}
+    <hr />
+    <!-- ➕ Create Post -->
+    <a href="{{ url_for('create_post') }}" class="btn edit">Create New Post</a>
+    <h3>Your Posts</h3>
+    <!-- 📄 Posts List -->
+    {% if posts %} {% for post in posts %}
+    <div class="post">
+      <h4>{{ post.title }}</h4>
+      <p>{{ post.content }}</p>
+      <!-- 🖼️ Post Image (if exists) -->
+      {% if post.image %}
+      <img
+        src="{{ url_for('static', filename='uploads/' + post.image) }}"
+        width="200"
+      />
+      {% endif %}
+      <!-- ⏱️ Created Time -->
+      {% if post.created_at %}
+      <p><small>Created at: {{ post.created_at }}</small></p>
+      {% endif %}
+      <!-- ✏️ Actions -->
+      <a href="{{ url_for('edit', id=post.id) }}" class="btn edit">Edit</a>
+      <a href="{{ url_for('delete', id=post.id) }}" class="btn delete"
+        >Delete</a
+      >
+    </div>
+    {% endfor %} {% else %}
+    <p>No posts yet.</p>
+    {% endif %}
+    <a href="{{url_for('home')}}">Back to Home</a>
+  </body>
+</html>

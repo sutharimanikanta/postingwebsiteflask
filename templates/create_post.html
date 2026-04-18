@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    {% with messages=get_flashed_messages(with_categories=true)%} {% if
+    messages%} {% for category, message in messages%}
+    <p style="color: green">{{message}}</p>
+    {% endfor%} {% endif%} {%endwith%}
+
+    <h1>Create New Post</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+      {{form.hidden_tag()}}
+
+      <div>
+        {{form.title.label}} {{form.title(size=50)}} {% if form.title.errors %}
+        <ul style="color: red">
+          {% for error in form.title.errors %}
+          <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+      <br />
+
+      <div>
+        {{form.content.label}} {{form.content(rows=5, cols=50)}} {% if
+        form.content.errors %}
+        <ul style="color: red">
+          {% for error in form.content.errors %}
+          <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+      <br />
+
+      <div>
+        {{form.image.label}} {{form.image()}} {% if form.image.errors %}
+        <ul style="color: red">
+          {% for error in form.image.errors %}
+          <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+      <br />
+
+      {{form.submit()}}
+    </form>
+    <a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+  </body>
+</html>
